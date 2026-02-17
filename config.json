@@ -1,0 +1,7 @@
+{
+  "google_api_key": "YOUR_GOOGLE_API_KEY",
+  "apple_api_key": "YOUR_APPLE_API_KEY",
+  "openstreetmap_api": "https://nominatim.openstreetmap.org",
+  "mobilenumber_api": "https://api.mobilenumber.info",
+  "imei_api": "https://api.imei.info"
+}
