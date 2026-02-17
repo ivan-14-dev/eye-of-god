@@ -6,20 +6,20 @@
 [![Flask](https://img.shields.io/badge/Flask-3.0-orange.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 ### Interface Web (Temps Réel)
-- 🗺️ **Google Maps** - Carte interactive en temps réel
-- 📡 **WebSocket** - Mises à jour live des positions
-- 📱 **Gestion des appareils** - Ajouter, suivre, localiser
-- 🔄 **Simulation GPS** - Test facile sans vrai appareil
+-  **Google Maps** - Carte interactive en temps réel
+-  **WebSocket** - Mises à jour live des positions
+-  **Gestion des appareils** - Ajouter, suivre, localiser
+-  **Simulation GPS** - Test facile sans vrai appareil
 
 ### CLI (Ligne de Commande)
-- 🔍 **Find Lost Device** - Recherche d'appareils perdus
-- 📍 **Localisation IMEI/WiFi/Cellulaire**
-- 📋 **Génération de rapports** pour la police
+-  **Find Lost Device** - Recherche d'appareils perdus
+-  **Localisation IMEI/WiFi/Cellulaire**
+-  **Génération de rapports** pour la police
 
-## 🚀 Installation
+##  Installation
 
 ```bash
 # Cloner le projet
@@ -53,7 +53,7 @@ cp .env.example .env
    // AIzaSy.....................
    ```
 
-## 📖 Utilisation
+##  Utilisation
 
 ### Interface Web (Recommandée)
 
@@ -89,7 +89,7 @@ python3 -m core.device_tracker list
 python3 -m core.device_tracker track 1
 ```
 
-## 📁 Structure du Projet
+##  Structure du Projet
 
 ```
 eye_of_go/
@@ -108,7 +108,7 @@ eye_of_go/
     └── find_lost_device.py      # Module recherche
 ```
 
-## 🔧 API Endpoints
+##  API Endpoints
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
@@ -119,13 +119,13 @@ eye_of_go/
 | GET | `/api/device/{id}/history` | Historique |
 | WebSocket | `/socket.io` | Temps réel |
 
-## ⚠️ Avertissements
+##  Avertissements
 
 - Ce projet est à des fins éducatives
 - L'utilisation doit être légale et respectueuse de la vie privée
 - Certaines fonctionnalités nécessitent un appareil mobile réel
 
-## 📝 License
+##  License
 
 MIT License - Voir [LICENSE](LICENSE)
 
