@@ -131,4 +131,4 @@ MIT License - Voir [LICENSE](LICENSE)
 
 ---
 
-Développé avec ❤️ par Ivan
+Développé avec  par Ivan
