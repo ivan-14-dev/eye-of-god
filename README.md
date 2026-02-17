@@ -1,139 +1,134 @@
 # 👁️ Eye of God - Device Tracker
 
-Un outil de suivi et de recherche d'appareils mobiles.
+> Application de suivi et recherche d'appareils mobiles en temps réel avec Google Maps
 
-## 📋 Fonctionnalités
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-orange.svg)](https://flask.palletsprojects.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-### Find Lost Device
-- Recherche par IMEI
-- Localisation par WiFi
-- Localisation par tours cellulaires
-- Génération de rapports pour la police
-- Création de cartes interactives
+## ✨ Fonctionnalités
 
-### Device Tracker
-- Authentification utilisateur
-- Liste de vos appareils
-- Suivi de localisation en temps réel
-- Historique des localisations
+### Interface Web (Temps Réel)
+- 🗺️ **Google Maps** - Carte interactive en temps réel
+- 📡 **WebSocket** - Mises à jour live des positions
+- 📱 **Gestion des appareils** - Ajouter, suivre, localiser
+- 🔄 **Simulation GPS** - Test facile sans vrai appareil
+
+### CLI (Ligne de Commande)
+- 🔍 **Find Lost Device** - Recherche d'appareils perdus
+- 📍 **Localisation IMEI/WiFi/Cellulaire**
+- 📋 **Génération de rapports** pour la police
 
 ## 🚀 Installation
 
 ```bash
 # Cloner le projet
-git clone <repo-url>
-cd eye_of_go
+git clone https://github.com/ivan-14-dev/eye-of-god.git
+cd eye-of-god
 
 # Installer les dépendances
 pip install -r requirements.txt
 ```
 
-## 📖 Utilisation
+## ⚙️ Configuration
 
-### Menu principal
-
+1. **Copier le fichier de configuration**
 ```bash
-python3 main.py
+cp .env.example .env
 ```
 
-### Find Lost Device
+2. **Obtenir une clé Google Maps API**
+   - Aller sur [Google Cloud Console](https://console.cloud.google.com/google/maps-apis)
+   - Créer un projet et activer "Maps JavaScript API"
+   - Générer une clé API
+
+3. **Configurer la clé API**
+   
+   Dans [`backend/app.py`](backend/app.py), remplacer:
+   ```javascript
+   // YOUR_API_KEY
+   ```
+   par votre vraie clé:
+   ```javascript
+   // AIzaSy.....................
+   ```
+
+## 📖 Utilisation
+
+### Interface Web (Recommandée)
 
 ```bash
-# Rechercher un téléphone perdu
+python3 backend/app.py
+```
+
+Puis ouvrir: **http://localhost:5000**
+
+| Identifiant | Mot de passe |
+|-------------|--------------|
+| test@example.com | test123 |
+
+### Ligne de Commande
+
+```bash
+# Find Lost Device - Rechercher un téléphone perdu
 python3 -m core.find_lost_device find --phone +33612345678
 
 # Enregistrer un téléphone perdu
 python3 -m core.find_lost_device register \
     --phone +33612345678 \
     --imei 123456789012345 \
-    --name "Nom du propriétaire" \
+    --name "Jean Dupont" \
     --device "iPhone 13"
 
 # Générer un rapport pour la police
 python3 -m core.find_lost_device report --phone +33612345678
 
-# Créer une carte interactive
-python3 -m core.find_lost_device map --phone +33612345678
-
-# Lister les appareils enregistrés
-python3 -m core.find_lost_device list
-```
-
-### Device Tracker
-
-```bash
-# Se connecter
-python3 -m core.device_tracker login email@example.com motdepasse
-
-# Lister mes appareils
+# Device Tracker CLI
+python3 -m core.device_tracker login test@example.com test123
 python3 -m core.device_tracker list
-
-# Tracker un appareil
 python3 -m core.device_tracker track 1
-
-# Historique
-python3 -m core.device_tracker history 1 --limit 50
 ```
 
-## ⚙️ Configuration
-
-Le fichier `config.json` est créé automatiquement avec les paramètres par défaut:
-
-```json
-{
-  "google_api_key": "YOUR_GOOGLE_API_KEY",
-  "apple_api_key": "YOUR_APPLE_API_KEY",
-  "openstreetmap_api": "https://nominatim.openstreetmap.org",
-  "mobilenumber_api": "https://api.mobilenumber.info",
-  "imei_api": "https://api.imei.info"
-}
-```
-
-## 📁 Structure
+## 📁 Structure du Projet
 
 ```
 eye_of_go/
-├── main.py                   # Point d'entrée
-├── requirements.txt          # Dépendances
-├── README.md                  # Ce fichier
-├── config.json               # Configuration (auto-généré)
-├── lost_devices.db          # Base de données (auto-généré)
+├── main.py                      # Point d'entrée principal
+├── requirements.txt             # Dépendances Python
+├── README.md                    # Ce fichier
+├── .env.example                 # Exemple de configuration
+├── config.json                  # Configuration API
+├── backend/
+│   ├── __init__.py
+│   └── app.py                   # Serveur Flask + WebSocket
 └── core/
     ├── __init__.py
-    ├── logger.py             # Système de logging
-    ├── device_tracker.py     # Module de suivi d'appareils
-    └── find_lost_device.py   # Module de recherche
-
-# Backend (optionnel)
-└── backend/
-    ├── __init__.py
-    └── app.py                # Serveur API Flask
+    ├── logger.py                # Système de logging
+    ├── device_tracker.py        # Module suivi d'appareils
+    └── find_lost_device.py      # Module recherche
 ```
 
-## 🚀 Démarrage Rapide
+## 🔧 API Endpoints
 
-### Interface Web (Recommandée)
-
-```bash
-# Installer les dépendances
-pip install -r requirements.txt
-
-# Démarrer le serveur
-python3 backend/app.py
-```
-
-Ouvrez http://localhost:5000 dans votre navigateur.
-
-**Important**: Remplacez `YOUR_API_KEY` dans [`backend/app.py`](backend/app.py) par votre clé API Google Maps.
-
-### Utilisation CLI
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/auth/login` | Connexion |
+| GET | `/api/my-devices` | Liste des appareils |
+| GET | `/api/device/{id}/location` | Localisation actuelle |
+| POST | `/api/device/{id}/location` | Mettre à jour position |
+| GET | `/api/device/{id}/history` | Historique |
+| WebSocket | `/socket.io` | Temps réel |
 
 ## ⚠️ Avertissements
 
-- Cet outil nécessite une connexion internet pour certaines fonctionnalités
-- La localisation par IMEI nécessite un accès aux bases de données appropriée
-- Utilisez cet outil de manière responsable et légale
+- Ce projet est à des fins éducatives
+- L'utilisation doit être légale et respectueuse de la vie privée
+- Certaines fonctionnalités nécessitent un appareil mobile réel
 
 ## 📝 License
 
-MIT License
+MIT License - Voir [LICENSE](LICENSE)
+
+---
+
+Développé avec ❤️ par Ivan
